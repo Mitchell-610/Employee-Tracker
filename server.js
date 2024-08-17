@@ -153,3 +153,18 @@ async function viewAllDepartments() {
     promptUser();
 }
 
+// Add a new department
+async function addDepartment() {
+    const { department_name } = await inquirer.prompt([
+        { type: 'input', name: 'department_name', message: 'Enter the department name:' }
+    ]);
+    const sql = 'INSERT INTO department (department_name) VALUES ($1) RETURNING id';
+    try {
+        const { rows } = await pool.query(sql, [department_name]);
+        console.log('Department added with ID:', rows[0].id);
+    } catch (err) {
+        console.error('Error adding department:', err.stack);
+    }
+    promptUser();
+}
+
