@@ -124,3 +124,20 @@ async function viewAllRoles() {
     promptUser();
 }
 
+// Add a new role
+async function addRole() {
+    const { title, salary, department_id } = await inquirer.prompt([
+        { type: 'input', name: 'title', message: 'Enter the role title:' },
+        { type: 'input', name: 'salary', message: 'Enter the role salary:' },
+        { type: 'input', name: 'department_id', message: 'Enter the department ID for the role:' }
+    ]);
+    const sql = 'INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3) RETURNING id';
+    try {
+        const { rows } = await pool.query(sql, [title, salary, department_id]);
+        console.log('Role added with ID:', rows[0].id);
+    } catch (err) {
+        console.error('Error adding role:', err.stack);
+    }
+    promptUser();
+}
+
