@@ -92,3 +92,19 @@ async function addEmployee() {
     promptUser();
 }
 
+// Update employee role
+async function updateEmployeeRole() {
+    const { id, role_id } = await inquirer.prompt([
+        { type: 'input', name: 'id', message: 'Enter the ID of the employee to update:' },
+        { type: 'input', name: 'role_id', message: 'Enter the new role ID:' }
+    ]);
+    const sql = 'UPDATE employees SET role_id = $1 WHERE id = $2';
+    try {
+        await pool.query(sql, [role_id, id]);
+        console.log('Employee role updated.');
+    } catch (err) {
+        console.error('Error updating employee role:', err.stack);
+    }
+    promptUser();
+}
+
