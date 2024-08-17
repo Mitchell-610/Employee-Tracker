@@ -168,3 +168,11 @@ async function addDepartment() {
     promptUser();
 }
 
+async function startServer() {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        promptUser();  // Start prompting after the server is ready
+    });
+}
+
+startServer();
