@@ -57,4 +57,21 @@ function quitProgram() {
     process.exit(0); // Exit the process with a success code
 }
 
+// View all employees
+async function viewAllEmployees() {
+    const sql = `
+    SELECT e.id, e.first_name, e.last_name, r.title AS role, d.department_name AS department
+    FROM employees e
+    JOIN role r ON e.role_id = r.id
+    JOIN department d ON r.department_id = d.id`;
+    try {
+        const { rows } = await pool.query(sql);
+        console.table(rows);
+    } catch (err) {
+        console.error('Error executing query', err.stack);
+    }
+    promptUser();
+}
+
+
 promptUser();
