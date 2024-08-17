@@ -52,4 +52,9 @@ async function promptUser() {
     }
 }
 
-promptUser()
+function quitProgram() {
+    console.log('Exiting the program.');
+    process.exit(0); // Exit the process with a success code
+}
+
+promptUser();
