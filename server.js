@@ -17,3 +17,15 @@ const pool = new Pool({
     port: 5432,  // Default PostgreSQL port
 });
 
+// Map user choices to functions
+const actionMap = {
+    'view all employees': viewAllEmployees,
+    'Add employee': addEmployee,
+    'Update Employee Role': updateEmployeeRole,
+    'View All Roles': viewAllRoles,
+    'Add Role': addRole,
+    'View All Departments': viewAllDepartments,
+    'Add Department': addDepartment,
+    'Quit': quitProgram // Add quit option
+};
+
