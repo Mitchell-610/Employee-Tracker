@@ -108,3 +108,19 @@ async function updateEmployeeRole() {
     promptUser();
 }
 
+// View all roles
+async function viewAllRoles() {
+    const sql = `
+        SELECT r.id, r.title, r.salary, d.department_name
+        FROM role r
+        JOIN department d ON r.department_id = d.id;
+    `;
+    try {
+        const { rows } = await pool.query(sql);
+        console.table(rows);
+    } catch (err) {
+        console.error('Error executing query', err.stack);
+    }
+    promptUser();
+}
+
