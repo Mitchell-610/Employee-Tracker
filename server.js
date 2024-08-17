@@ -141,3 +141,15 @@ async function addRole() {
     promptUser();
 }
 
+// View all departments
+async function viewAllDepartments() {
+    const sql = 'SELECT id, department_name FROM department';
+    try {
+        const { rows } = await pool.query(sql);
+        console.table(rows);
+    } catch (err) {
+        console.error('Error executing query', err.stack);
+    }
+    promptUser();
+}
+
