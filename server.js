@@ -29,3 +29,27 @@ const actionMap = {
     'Quit': quitProgram // Add quit option
 };
 
+async function promptUser() {
+    try {
+        const { userInput } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'userInput',
+                message: 'What would you like to do?',
+                choices: Object.keys(actionMap)
+            }
+        ]);
+
+        const action = actionMap[userInput];
+        if (action) {
+            await action();
+        } else {
+            console.log('Invalid choice.');
+            promptUser();
+        }
+    } catch (error) {
+        console.error('Error prompting user:', error);
+    }
+}
+
+promptUser()
