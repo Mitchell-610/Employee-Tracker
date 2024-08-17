@@ -20,8 +20,8 @@ This is a command line application that allows users to update they're company a
 - [Questions](#questions)
 
 ## Installation
-Must install, express, inquirer, and pg.
-
+Must install, express, inquirer, and pg. Below is a link of how to run the application within your command-line.
+https://drive.google.com/file/d/1URlpUhmjxK3-ZgO1CTPc5JGEap8nY7Vl/view?usp=sharing
 ## Usage
 N/A
 
