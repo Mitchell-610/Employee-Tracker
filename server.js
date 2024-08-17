@@ -73,5 +73,22 @@ async function viewAllEmployees() {
     promptUser();
 }
 
+// Add employee
+async function addEmployee() {
+    const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
+        { type: 'input', name: 'first_name', message: 'Enter the first name of the employee:' },
+        { type: 'input', name: 'last_name', message: 'Enter the last name of the employee:' },
+        { type: 'input', name: 'role_id', message: 'Enter the role ID for the employee:' },
+        { type: 'input', name: 'manager_id', message: 'Enter the manager ID for the employee (optional):', default: null }
+    ]); 
+    const sql = 'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4) RETURNING id';
+    try {
+        const { rows } = await pool.query(sql, [first_name, last_name, role_id, manager_id]);
+        console.log('Employee added with ID:', rows[0].id);
+        console.log(rows);
+    } catch (err) {
+        console.error('Error adding employee:', err.stack);
+    }
+    promptUser();
+}
 
-promptUser();
